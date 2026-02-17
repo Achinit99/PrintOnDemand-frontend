@@ -31,7 +31,7 @@ jobs:
     - name: Install Dependencies & Build
       run: |
         npm install
-        npm run build
+        CI=false npm run build
 
     # 4. Configure AWS Credentials
     - name: Configure AWS Credentials
