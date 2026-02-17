@@ -52,8 +52,8 @@
     "tailwindcss": "^4.1.11"
   },
   "overrides": {
-  "jsonpath": "1.1.1",
-  "ajv": "8.12.0",
-  "nth-check": "2.0.1"
+  "jsonpath": ">=1.1.1",
+  "ajv": ">=8.12.0",
+  "nth-check": ">=2.0.1"
   }
 }
