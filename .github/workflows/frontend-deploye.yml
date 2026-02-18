@@ -14,27 +14,34 @@ jobs:
       with:
         fetch-depth: 0
 
-    # 1. Scan for hardcoded secrets (AWS Keys, Passwords, etc.)
+    # 1. Setup Node.js 
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '22'
+        cache: 'npm'
+
+    # 2. Scan for hardcoded secrets
     - name: Gitleaks Scan
       uses: gitleaks/gitleaks-action@v2
       continue-on-error: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    # 2. Security Scan (SCA) - Check for vulnerable npm packages
+    # 3. Security Scan (SCA)
     - name: Snyk Security Scan
       uses: snyk/actions/node@master
       continue-on-error: true
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
-    # 3. Build React Application
+    # 4. Install Dependencies & Build 
     - name: Install Dependencies & Build
       run: |
         npm install --legacy-peer-deps
         CI=false npm run build
 
-    # 4. Configure AWS Credentials
+    # 5. Configure AWS Credentials
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -42,7 +49,7 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ap-south-1
 
-    # 5. Deploy Build Files to S3 Bucket
+    # 6. Deploy Build Files to S3 Bucket
     - name: Deploy to S3
       run: |
         aws s3 sync build/ s3://print-on-one-frontend-2026 --delete
