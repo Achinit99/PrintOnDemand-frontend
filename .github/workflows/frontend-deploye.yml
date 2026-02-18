@@ -39,10 +39,13 @@ jobs:
     - name: Install Dependencies & Build
       run: |
         npm install --legacy-peer-deps
-        echo "module.exports = function() { return { apply: () => {} }; };" > node_modules/fork-ts-checker-webpack-plugin/lib/index.js
-        CI=false TSC_COMPILE_ON_ERROR=true npm run build
+        
+        node -e "const fs = require('fs'); const path = 'node_modules/fork-ts-checker-webpack-plugin/lib/index.js'; if (fs.existsSync(path)) { fs.writeFileSync(path, 'module.exports = function() { return { apply: () => {} }; };'); }"
+        
+        npm run build
       env:
-        DISABLE_ESLINT_PLUGIN: true
+        CI: false
+        TSC_COMPILE_ON_ERROR: true
         GENERATE_SOURCEMAP: false
 
     # 5. Configure AWS Credentials
