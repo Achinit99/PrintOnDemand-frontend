@@ -38,7 +38,7 @@ export default function UserManagementPage() {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:1010/auth/user');
+      const response = await axios.get('http://13.235.135.226/auth/user');
       setUserData(response.data);
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -47,7 +47,7 @@ export default function UserManagementPage() {
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get('http://localhost:1010/orders');
+      const response = await axios.get('http://13.235.135.226/orders');
       setOrders(response.data);
     } catch (error) {
       console.error('Error fetching orders:', error);
@@ -75,7 +75,7 @@ export default function UserManagementPage() {
 
   const handleConfirmDeleteUser = async () => {
     try {
-      await axios.delete(`http://localhost:1010/auth/delete/${deletingUser.id}`);
+      await axios.delete(`http://13.235.135.226/auth/delete/${deletingUser.id}`);
       handleCloseDeleteDialog();
       fetchUsers(); 
     } catch (err) {
@@ -85,7 +85,7 @@ export default function UserManagementPage() {
 
   const handleUpdateUser = async () => {
     try {
-      await axios.put(`http://localhost:1010/auth/user/${editingUser.id}`, editingUser);
+      await axios.put(`http://13.235.135.226/auth/user/${editingUser.id}`, editingUser);
       handleCloseEditModal();
       fetchUsers(); 
     } catch (err) {
@@ -115,7 +115,7 @@ export default function UserManagementPage() {
 
   const handleConfirmDelete = async () => {
     try {
-      await axios.delete(`http://localhost:1010/orders/delete/${orderToDelete.id}`);
+      await axios.delete(`http://13.235.135.226/orders/delete/${orderToDelete.id}`);
       handleCancelDelete();
       fetchOrders(); 
     } catch (err) {

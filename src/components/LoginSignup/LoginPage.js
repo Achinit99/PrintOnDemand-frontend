@@ -21,7 +21,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const handleLogin = async () => {
   try {
-    const response = await axios.post('http://localhost:1010/auth/login', {
+    const response = await axios.post('http://13.235.135.226/auth/login', {
       email,
       password,
     });

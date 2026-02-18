@@ -20,7 +20,7 @@ const SignupPage = () => {
 
   const handleSignup = async () => {
     try {
-      const response = await axios.post('http://localhost:1010/auth/register', {
+      const response = await axios.post('http://13.235.135.226/auth/register', {
         name,
         email,
         city,
