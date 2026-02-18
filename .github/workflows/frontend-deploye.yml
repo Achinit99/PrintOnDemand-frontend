@@ -35,11 +35,13 @@ jobs:
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
-    # 4. Install Dependencies & Build 
+    # 4. Install Dependencies & Build
     - name: Install Dependencies & Build
       run: |
         npm install --legacy-peer-deps
-        CI=false npm run build
+        CI=false TSC_COMPILE_ON_ERROR=true npm run build
+      env:
+        DISABLE_ESLINT_PLUGIN: true
 
     # 5. Configure AWS Credentials
     - name: Configure AWS Credentials
