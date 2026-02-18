@@ -39,9 +39,10 @@ jobs:
     - name: Install Dependencies & Build
       run: |
         npm install --legacy-peer-deps
-        CI=false TSC_COMPILE_ON_ERROR=true npm run build
+        CI=false TSC_COMPILE_ON_ERROR=true FORK_TS_CHECKER_IDLE_INTERVAL=10000000 npm run build
       env:
         DISABLE_ESLINT_PLUGIN: true
+        GENERATE_SOURCEMAP: false
 
     # 5. Configure AWS Credentials
     - name: Configure AWS Credentials
